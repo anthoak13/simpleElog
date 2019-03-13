@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -11,6 +10,24 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/GenieStyle.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+      $(document).ready(function(){
+        var applyChange = function() {
+          var scaler1 = $('input[name=scaler1]').val();
+          var scaler2 = $('input[name=scaler2]').val();
+          var scaler3 = $('input[name=scaler3]').val();
+          $('input[name=calc1]').attr('placeholder', scaler3/scaler1);
+          $('input[name=calc2]').attr('placeholder', scaler3/scaler2);
+          $('input[name=calc3]').attr('placeholder', scaler2/scaler1);
+        };
+
+        applyChange();
+
+        $('input[name=scaler1]').keyup(applyChange);
+        $('input[name=scaler2]').keyup(applyChange);
+        $('input[name=scaler3]').keyup(applyChange);
+      });
+    </script>
   </head>
   <body>
     <div class="container">
@@ -49,13 +66,8 @@
         </div>
         <div class="form-row justify-content-sm-center">
           <div class="form-group col-sm-2">
-            <label for="runType">Run type</label>
-            <select class="form-control form-control-sm" name="runType">
-              <option value="-1">----</option>
-              {% for runTypeText in log.runTypeText %}
-              <option value={{ forloop.counter0 }} {% if log.run_type == forloop.counter0 %} selected {% endif %}>{{ runTypeText }}</option>
-              {% endfor %}
-            </select>
+            <label for="scribe">Scribe</label>
+            <input type="text" class="form-control form-control-sm" name="scribe" value="{{ log.scribe }}">
           </div>
           <div class="form-group col-sm-2">
             <label for="fc73Begin">FC73</label>
@@ -103,6 +115,50 @@
           </div>
         </div>
         <div class="form-row justify-content-sm-center">
+          <div class="form-group col-sm-2">
+            <label for="runType">Run type</label>
+            <select class="form-control form-control-sm" name="runType">
+              <option value="-1">----</option>
+              {% for runTypeText in log.runTypeText %}
+              <option value={{ forloop.counter0 }} {% if log.run_type == forloop.counter0 %} selected {% endif %}>{{ runTypeText }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group col-sm-2">
+            <label for="triggerType">Trigger type</label>
+            <select class="form-control form-control-sm" name="triggerType">
+              <option value="-1">----</option>
+              {% for triggerTypeText in log.triggerTypeText %}
+              <option value={{ forloop.counter0 }} {% if log.trigger_type == forloop.counter0 %} selected {% endif %}>{{ triggerTypeText }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group col-sm-1">
+            <label for="scaler1">OBJ Scint</label>
+            <input type="number" class="form-control form-control-sm" name="scaler1" step="1" value="{{ log.scaler1 }}">
+          </div>
+          <div class="form-group col-sm-1">
+            <label for="scaler2">XFP Scint</label>
+            <input type="number" class="form-control form-control-sm" name="scaler2" step="1" value="{{ log.scaler2 }}">
+          </div>
+          <div class="form-group col-sm-1">
+            <label for="scaler3">Red&Blue</label>
+            <input type="text" class="form-control form-control-sm" name="scaler3" step="1" value="{{ log.scaler3 }}">
+          </div>
+          <div class="form-group col-sm-1">
+            <label for="calc1">R&B/OBJ</label>
+            <input type="text" class="form-control form-control-sm" name="calc1" placeholder="" readonly>
+          </div>
+          <div class="form-group col-sm-1">
+            <label for="calc2">R&B/XFP</label>
+            <input type="text" class="form-control form-control-sm" name="calc2" placeholder="" readonly>
+          </div>
+          <div class="form-group col-sm-1">
+            <label for="calc3">XFP/OBJ</label>
+            <input type="text" class="form-control form-control-sm" name="calc3" placeholder="" readonly>
+          </div>
+        </div>
+        <div class="form-row justify-content-sm-center">
           <div class="form-group col-sm-10">
             <label for="title">Title</label>
             <input type="text" class="form-control form-control-sm" name="title" value="{{ log.title }}">
@@ -111,7 +167,7 @@
         <div class="form-row justify-content-sm-center">
           <div class="form-group col-sm-10">
             <label for="note">Note</label>
-            <textarea class="form-control form-control-sm" name="note" rows="5">{{ log.note }}</textarea>
+            <textarea class="form-control form-control-sm" name="note" rows="8">{{ log.note }}</textarea>
           </div>
         </div>
       </form>

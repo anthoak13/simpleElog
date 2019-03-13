@@ -6,7 +6,6 @@ class Log(models.Model):
     run_number = models.IntegerField(null=True)
     start_time = models.DateTimeField(null=True)
     stop_time = models.DateTimeField(null=True)
-    run_type = models.IntegerField(default=-1)
     fc73_begin = models.FloatField(default=0)
     fc74_begin = models.FloatField(default=0)
     fc75_begin = models.FloatField(default=0)
@@ -15,15 +14,28 @@ class Log(models.Model):
     fc74_end = models.FloatField(default=0)
     fc75_end = models.FloatField(default=0)
     ic_gas_pressure_end = models.FloatField(default=0)
+    scribe = models.CharField(max_length=50, default='')
+    run_type = models.IntegerField(default=-1)
+    trigger_type = models.IntegerField(default=-1)
+    scaler1 = models.IntegerField(default=0) # OBJ Scint
+    scaler2 = models.IntegerField(default=0) # XFP Scint
+    scaler3 = models.IntegerField(default=0) # RED&BLUE
     title = models.CharField(max_length=200, default='')
     note = models.TextField(null=True, default='')
 
     runTypeText = ["Production", "Beam", "Callibration", "Trigger", "Note", "Junk"]
-    runTypeTextLength = len(runTypeText)
+
+    triggerTypeText = ["Coincidence", "DS10", "Coinci.+DS10", "Secondary", "S800 single"]
     
     def getRunType(self):
-        if (int(self.run_type) < self.runTypeTextLength and int(self.run_type) >= 0):
+        if (int(self.run_type) < len(self.runTypeText) and int(self.run_type) >= 0):
             return self.runTypeText[self.run_type]
+        else:
+            return "----"
+
+    def getTriggerType(self):
+        if (int(self.trigger_type) < len(self.triggerTypeText) and int(self.trigger_type) >= 0):
+            return self.triggerTypeText[self.trigger_type]
         else:
             return "----"
 
