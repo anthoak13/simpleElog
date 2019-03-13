@@ -24,7 +24,7 @@ class IndexView(generic.ListView):
             return Log.objects.order_by('-run_number', '-start_time')
 
 def logForm(request):
-    return render(request, 'elog/logForm.html', {'runTypeTextList': Log.runTypeText })
+    return render(request, 'elog/logForm.html', {'runTypeTextList': Log.runTypeText, "triggerTypeTextList": Log.triggerTypeText})
 
 def logFormWithPrev(request):
     log = Log.objects.order_by('-id')
@@ -83,3 +83,6 @@ def modifyLog(request, pk):
 class DetailView(generic.DetailView):
     model = Log
     template_name = 'elog/logDetail.html'
+
+def numData(request):
+    return HttpResponse(len(Log.objects.all()))

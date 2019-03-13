@@ -11,4 +11,5 @@ urlpatterns = [
     path('logForm/addLog/', views.addLog, name="addLog"),
     path('logDetail/<int:pk>/', views.DetailView.as_view(), name="logDetail"),
     path('logDetail/<int:pk>/modifyLog/', views.modifyLog, name="modifyLog"),
+    path('numData/', views.numData, name="numData"),
 ]
