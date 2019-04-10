@@ -55,16 +55,19 @@
             <th scope="col" width="110px">Run length</td>
             <th scope="col" width="120px"><a href="{% url 'elog:indexRunTypeSorted' %}" style="color:black">Run type{% if request.path == '/elog/sortRunType/' %} ▼{% endif %}</a></td>
             <th scope="col" width="120px">Trigger</td>
-            <th scope="col" width="80px">FC73</td>
-            <th scope="col" width="80px">FC74</td>
+<!--            <th scope="col" width="80px">FC73</td> -->
+<!--            <th scope="col" width="80px">FC74</td> -->
             <th scope="col" width="80px">FC75</td>
+            <th scope="col" width="80px">D1</td>
+            <th scope="col" width="80px">D2</td>
             <th scope="col" width="80px">IC Gas P</td>
-            <th scope="col" width="80px">OBJ Scint</td>
-            <th scope="col" width="80px">XFP Scint</td>
-            <th scope="col" width="80px">RED&BLUE</td>
-            <th scope="col" width="80px">R&B/OBJ</td>
-            <th scope="col" width="80px">R&B/XFP</td>
-            <th scope="col" width="80px">XFP/OBJ</td>
+            <th scope="col" width="85px">XFP Scint</td>
+            <th scope="col" width="85px">OBJ Scint</td> <!-- SWAP 1-->
+            <th scope="col" width="85px">RED&BLUE</td>
+            <th scope="col" width="85px">OBJ/XFP</td>
+            <th scope="col" width="85px">R&B/OBJ</td>
+            <th scope="col" width="85px">R&B/XFP</td>
+        
             <th scope="col">Title</td>
           </tr>
         </thead>
@@ -77,22 +80,26 @@
             <td rowspan=2 class="align-middle">{{ logEntry.getDuration }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.getRunType }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.getTriggerType }}</td>
-            <td>{{ logEntry.fc73_begin }}</td>
-            <td>{{ logEntry.fc74_begin }}</td>
+<!--            <td>{{ logEntry.fc73_begin }}</td> -->
+<!--            <td>{{ logEntry.fc74_begin }}</td> -->
             <td>{{ logEntry.fc75_begin }}</td>
+            <td>{{ logEntry.d1_begin|floatformat:4 }}</td>
+            <td>{{ logEntry.d2_begin|floatformat:4 }}</td>
             <td>{{ logEntry.ic_gas_pressure_begin }}</td>
-            <td rowspan=2 class="align-middle">{{ logEntry.scaler1 }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.scaler2 }}</td>
+            <td rowspan=2 class="align-middle">{{ logEntry.scaler1 }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.scaler3 }}</td>
+            <td rowspan=2 class="align-middle">{{ logEntry.scaler1|div:logEntry.scaler2|floatformat:4 }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.scaler3|div:logEntry.scaler1|floatformat:4 }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.scaler3|div:logEntry.scaler2|floatformat:4 }}</td>
-            <td rowspan=2 class="align-middle">{{ logEntry.scaler2|div:logEntry.scaler1|floatformat:4 }}</td>
             <td rowspan=2 class="align-middle">{{ logEntry.title|truncatechars:110 }}</td>
           </tr>
           <tr>
-            <td>{{ logEntry.fc73_end }}</td>
-            <td>{{ logEntry.fc74_end }}</td>
+<!--            <td>{{ logEntry.fc73_end }}</td> -->
+<!--            <td>{{ logEntry.fc74_end }}</td> -->
             <td>{{ logEntry.fc75_end }}</td>
+            <td>{{ logEntry.d1_end|floatformat:4 }}</td>
+            <td>{{ logEntry.d2_end|floatformat:4 }}</td>
             <td>{{ logEntry.ic_gas_pressure_end }}</td>
           </tr>
         </tbody>

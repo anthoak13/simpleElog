@@ -42,10 +42,15 @@ def addLog(request):
     log.fc73_begin = float(request.POST['fc73Begin'])
     log.fc74_begin = float(request.POST['fc74Begin'])
     log.fc75_begin = float(request.POST['fc75Begin'])
+    log.d1_begin = float(request.POST['d1Begin'])
+    log.d2_begin = float(request.POST['d2Begin'])
+    log.ic_gas_pressure_begin = float(request.POST['icGasPressureBegin'])
     log.ic_gas_pressure_begin = float(request.POST['icGasPressureBegin'])
     log.fc73_end = float(request.POST['fc73End'])
     log.fc74_end = float(request.POST['fc74End'])
     log.fc75_end = float(request.POST['fc75End'])
+    log.d1_end = float(request.POST['d1End'])
+    log.d2_end = float(request.POST['d2End'])
     log.ic_gas_pressure_end = float(request.POST['icGasPressureEnd'])
     log.scribe = request.POST['scribe']
     log.run_type = int(request.POST['runType'])
@@ -64,10 +69,14 @@ def modifyLog(request, pk):
     log.fc73_begin = float(request.POST['fc73Begin'])
     log.fc74_begin = float(request.POST['fc74Begin'])
     log.fc75_begin = float(request.POST['fc75Begin'])
+    log.d1_begin = float(request.POST['d1Begin'])
+    log.d2_begin = float(request.POST['d2Begin'])
     log.ic_gas_pressure_begin = float(request.POST['icGasPressureBegin'])
     log.fc73_end = float(request.POST['fc73End'])
     log.fc74_end = float(request.POST['fc74End'])
     log.fc75_end = float(request.POST['fc75End'])
+    log.d1_end = float(request.POST['d1End'])
+    log.d2_end = float(request.POST['d2End'])
     log.ic_gas_pressure_end = float(request.POST['icGasPressureEnd'])
     log.scribe = request.POST['scribe']
     log.run_type = int(request.POST['runType'])
@@ -86,3 +95,10 @@ class DetailView(generic.DetailView):
 
 def numData(request):
     return HttpResponse(len(Log.objects.all()))
+
+def graph(request):
+    list = Log.objects.exclude(run_type=4).exclude(run_type=5).order_by('-start_time')
+    if list[0].stop_time == None:
+      return render(request, 'elog/graphs.html', {'logs':Log.objects.exclude(run_type=4).exclude(run_type=5).order_by('-start_time')[1:]})
+    else:
+      return render(request, 'elog/graphs.html', {'logs':Log.objects.exclude(run_type=4).exclude(run_type=5).order_by('-start_time')[0:]})

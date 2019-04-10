@@ -9,10 +9,14 @@ class Log(models.Model):
     fc73_begin = models.FloatField(default=0)
     fc74_begin = models.FloatField(default=0)
     fc75_begin = models.FloatField(default=0)
+    d1_begin = models.FloatField(default=0)
+    d2_begin = models.FloatField(default=0)
     ic_gas_pressure_begin = models.FloatField(default=0)
     fc73_end = models.FloatField(default=0)
     fc74_end = models.FloatField(default=0)
     fc75_end = models.FloatField(default=0)
+    d1_end = models.FloatField(default=0)
+    d2_end = models.FloatField(default=0)
     ic_gas_pressure_end = models.FloatField(default=0)
     scribe = models.CharField(max_length=50, default='')
     run_type = models.IntegerField(default=-1)
@@ -23,9 +27,9 @@ class Log(models.Model):
     title = models.CharField(max_length=200, default='')
     note = models.TextField(null=True, default='')
 
-    runTypeText = ["Production", "Beam", "Callibration", "Trigger", "Note", "Junk"]
+    runTypeText = ["Data", "Beam", "Calibration", "Trigger", "Note", "Junk"]
 
-    triggerTypeText = ["Coincidence", "DS10", "Coinci.+DS10", "Secondary", "S800 single"]
+    triggerTypeText = ["Coincidence", "DS10", "Coinci.+DS50", "Secondary", "S800 singles", "CsI singles"]
     
     def getRunType(self):
         if (int(self.run_type) < len(self.runTypeText) and int(self.run_type) >= 0):

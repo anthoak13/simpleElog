@@ -18,7 +18,7 @@
           var scaler3 = $('input[name=scaler3]').val();
           $('input[name=calc1]').attr('placeholder', scaler3/scaler1);
           $('input[name=calc2]').attr('placeholder', scaler3/scaler2);
-          $('input[name=calc3]').attr('placeholder', scaler2/scaler1);
+          $('input[name=calc3]').attr('placeholder', scaler1/scaler2);
         };
 
         applyChange();
@@ -66,17 +66,15 @@
         </div>
         <div class="form-row justify-content-sm-center">
           <div class="form-group col-sm-2">
-            <label for="scribe">Scribe</label>
-            <input type="text" class="form-control form-control-sm" name="scribe" value="{{ log.scribe }}">
           </div>
           <div class="form-group col-sm-2">
             <label for="fc73Begin">FC73</label>
             <div class="form-row">
               <div class="col">
-                <input type="number" class="form-control form-control-sm" name="fc73Begin" step="0.0001" value="{{ log.fc73_begin }}">
+                <input type="number" class="form-control form-control-sm" name="fc73Begin" step="0.00001" value="{{ log.fc73_begin }}">
               </div>
               <div class="col">
-                <input type="number" class="form-control form-control-sm" name="fc73End" step="0.0001" value="{{ log.fc73_end }}">
+                <input type="number" class="form-control form-control-sm" name="fc73End" step="0.00001" value="{{ log.fc73_end }}">
               </div>
             </div>
           </div>
@@ -84,10 +82,10 @@
             <label for="fc74Begin">FC74</label>
             <div class="form-row">
               <div class="col">
-                <input type="number" class="form-control form-control-sm" name="fc74Begin" step="0.0001" value="{{ log.fc74_begin }}">
+                <input type="number" class="form-control form-control-sm" name="fc74Begin" step="0.00001" value="{{ log.fc74_begin }}">
               </div>
               <div class="col">
-                <input type="number" class="form-control form-control-sm" name="fc74End" step="0.0001" value="{{ log.fc74_end }}">
+                <input type="number" class="form-control form-control-sm" name="fc74End" step="0.00001" value="{{ log.fc74_end }}">
               </div>
             </div>
           </div>
@@ -95,10 +93,40 @@
             <label for="fc75Begin">FC75</label>
             <div class="form-row">
               <div class="col">
-                <input type="number" class="form-control form-control-sm" name="fc75Begin" step="0.0001" value="{{ log.fc75_begin }}">
+                <input type="number" class="form-control form-control-sm" name="fc75Begin" step="0.00001" value="{{ log.fc75_begin }}">
               </div>
               <div class="col">
-                <input type="number" class="form-control form-control-sm" name="fc75End" step="0.0001" value="{{ log.fc75_end }}">
+                <input type="number" class="form-control form-control-sm" name="fc75End" step="0.00001" value="{{ log.fc75_end }}">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+          </div>
+        </div>
+        <div class="form-row justify-content-sm-center">
+          <div class="form-group col-sm-2">
+            <label for="scribe">Scribe</label>
+            <input type="text" class="form-control form-control-sm" name="scribe" value="{{ log.scribe }}" required>
+          </div>
+          <div class="form-group col-sm-2">
+            <label for="d1">D1</label>
+            <div class="form-row">
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="d1Begin" step="0.00001" value="{{ log.d1_begin }}">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="d1End" step="0.00001" value="{{ log.d1_end }}">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-2">
+            <label for="d2">D2</label>
+            <div class="form-row">
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="d2Begin" step="0.00001" value="{{ log.d2_begin }}">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control form-control-sm" name="d2End" step="0.00001" value="{{ log.d2_end }}">
               </div>
             </div>
           </div>
@@ -112,6 +140,8 @@
                 <input type="number" class="form-control form-control-sm" name="icGasPressureEnd" step="0.0001" value="{{ log.ic_gas_pressure_end }}">
               </div>
             </div>
+          </div>
+          <div class="form-group col-sm-2">
           </div>
         </div>
         <div class="form-row justify-content-sm-center">
@@ -154,7 +184,7 @@
             <input type="text" class="form-control form-control-sm" name="calc2" placeholder="" readonly>
           </div>
           <div class="form-group col-sm-1">
-            <label for="calc3">XFP/OBJ</label>
+            <label for="calc3">OBJ/XFP</label>
             <input type="text" class="form-control form-control-sm" name="calc3" placeholder="" readonly>
           </div>
         </div>
