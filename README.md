@@ -77,7 +77,7 @@ from django.contrib import admin
 +from django.urls import path, include
 
 urlpatterns = [
-+   path('elog/', include('elog.urls')),
++    path('elog/', include('elog.urls')),
     path('admin/', admin.site.urls),
 ]
 ```
@@ -103,7 +103,38 @@ Adding the three hosts allows you to run server on any fishtank host.
 
 ## 5 Elog settings
 
-TO BE WRITTEN
+## 5.1 elog/models.py
+
+By default, elog has 15 parameters, 10 are assigned for logging entries and the other 5 for scaler values for convenience. However, you can just change the variable name into anything you want to use for both par# and scaler#.
+
+Most likly you need to specify specific run and trigger types. Modify the following two lines as you wish.
+
+```
+runTypeText = []
+triggerTypeText = []
+```
+
+For example,
+
+```diff
+-runTypeText = []
++runTypeText = ["Calibration", "208Pb beam", "Cocktail beam"]
+-triggerTypeText = []
++triggerTypeText = ["Ion chamber", "Silicon", "MCP"]
+```
+
+Each entry is automatically assigned by a number starting from 0 in the database. So, in this example, if you choose **Calibration**, 0 will be stored in the database.
+
+So, after you add something in the log, **DO NOT CHANGE THE ORDER OR ADD ANYTHING INBETWEEN. YOU CAN ONLY ADD SOMETHING AT THE END!**.
+
+Once it's done, type the followings to create database and to connect variables to the database.
+
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Modifying run and trigger type entries doesn't need to rerun two lines above, but if you change/add/delete parameter or scaler variable name, you must run two lines after the modification.
 
 ## 6 Run elog server!
 
